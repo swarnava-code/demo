@@ -1,0 +1,94 @@
+
+
+# Models mapping
+
+type Product {
+    productId: ID!
+    productName: String!
+    brand: String!
+    color: String!
+    material: String!
+    shape: String!
+    notes: String
+    extraNotes: String
+}
+
+type Location {
+    locationId: ID!
+    area: String!
+    coordinates: String!
+    pinCode: String!
+    address: String!
+    country: String
+    state: String
+    fcName: String
+}
+
+type Item {
+    itemId: ID!
+    mrpPrice: Float!
+    discountByPercentage: Int!
+    product: Product!
+    location: Location!
+}
+
+
+# Request Inputs for Mutation
+#input ProductInput {
+#    productId: ID!
+#    productName: String!
+#    brand: String!
+#    color: String!
+#    material: String!
+#    shape: String!
+#    notes: String
+#    extraNotes: String
+#}
+#
+#input LocationInput {
+#    locationId: ID!
+#    area: String!
+#    coordinates: String!
+#    pinCode: String!
+#    address: String!
+#    country: String
+#    state: String
+#    fcName: String
+#}
+
+# Mutation mapping
+type Mutation {
+    createLocation(
+        area: String!,
+        coordinates: String!,
+        pinCode: String!,
+        address: String!,
+        country: String!,
+        state: String!,
+        fcName: String!
+    ): Location,
+
+    createProduct(
+        brand: String!,
+        color: String!,
+        material: String!,
+        shape: String!,
+        notes: String,
+        extraNotes: String
+    ): Product,
+
+    createItem(
+        mrpPrice: Float!,
+        discountByPercentage: Int!,
+        productId: Int!,
+        locationId: Int!
+    ): Item
+}
+
+# Query mapping
+type Query {
+    findAllLocations: [Location],
+    findAllProducts: [Product],
+    findAllItems: [Item],
+    findItem(id: Int!): Item
+}
